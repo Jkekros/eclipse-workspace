@@ -1,0 +1,23 @@
+package inc.soft.advpaint.x64.figures;
+
+public class Point extends figure{
+
+	
+	private double X;
+	private double Y;
+	public Point(String name,double x,double y) {
+		super(name);
+		this.X = x;
+		this.Y = y;
+	}
+	@Override
+	public void Translate(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
+	public String ToString() {
+		return "x,y :" + X +","+ Y;
+		
+	};
+
+}

@@ -1,0 +1,10 @@
+package inc.soft.advpaint.x64.figures;
+
+public class SegNomme extends Segment {
+
+	public SegNomme(String name, Point p1, Point p2) {
+		super(name, p1, p2);
+		// TODO Auto-generated constructor stub
+	}
+
+}

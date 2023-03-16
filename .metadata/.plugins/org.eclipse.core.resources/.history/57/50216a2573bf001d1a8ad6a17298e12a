@@ -1,0 +1,23 @@
+package inc.soft.advpaint.x64.figures;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public Main() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JFrame fr = new JFrame();
+		fr.setSize(new Dimension(800,600));
+		fr.setDefaultCloseOperation(fr.EXIT_ON_CLOSE);
+		fr.setVisible(true);
+	}
+	
+	
+
+}

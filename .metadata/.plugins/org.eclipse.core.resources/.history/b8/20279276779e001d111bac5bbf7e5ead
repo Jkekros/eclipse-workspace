@@ -1,0 +1,54 @@
+package inc.soft.advpaint.x64.figures;
+
+public class Test {
+
+	
+	public static void testPoint() {
+		Point p = new Point("test",10,15);
+		System.out.println(p.ToString());
+		p.Translate(5, 5);
+		System.out.println(p.ToString());
+		p.affichage();
+	}
+	public static void testseg() {
+		Segment s = new Segment("test",new Point("p1",10,15),new Point("p2",20,35));
+		System.out.println(s.ToString());
+		s.Translate(5, 5);
+		System.out.println(s.ToString());
+		
+		s.affichage();
+		
+	}
+	public static void testcercle() {
+		Cercle c = new Cercle("test",new Point("tes",15,20),20);
+		System.out.println(c.ToString());
+		c.Translate(5, 5);
+		System.out.println(c.ToString());
+		
+		c.affichage();
+		c = new Cercle("test",new Point("p1",10,15),new Point("p2",20,35));
+		System.out.println(c.ToString());
+		c.Translate(5, 5);
+		System.out.println(c.ToString());
+		
+		c.affichage();
+	}
+	public static void testpointnomme() {
+		PointNomme p1 = new PointNomme("hello", 10, 15);
+		PointNomme p2 = new PointNomme("world", 10, 15);
+		Point pn1 = p1;
+		Point pn2 = p2;
+		System.out.println("p1: "+ p1.getNom()+"and p2: "+p2.getNom()+" pn1: "+pn1.ToString());
+	}
+	public static void main(String[] args) {
+		System.out.println("test point");
+		testPoint();
+		System.out.println("test seg");
+		testseg();
+		
+		System.out.println("test cercle");
+		testcercle();
+
+	}
+	
+}

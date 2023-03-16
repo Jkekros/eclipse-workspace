@@ -1,0 +1,47 @@
+package inc.soft.advpaint.x64.figures;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
+public class Main {
+
+	public Main() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JFrame fr = new JFrame();
+		
+		fr.setSize(new Dimension(800,600));
+		fr.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		
+		Container cont = fr.getContentPane();
+		JPanel co2 = new JPanel();
+		JPanel co = new JPanel();
+		co.setBackground(Color.blue);
+		co2.setBackground(Color.red);
+		JButton j = new JButton("point");
+		JButton j1 = new JButton("segment");
+		JButton j2 = new JButton("new button");
+		JButton j3 = new JButton("new button");
+		
+		co.add(j);
+		
+		cont.add(co, BorderLayout.EAST);
+		cont.add(co2,BorderLayout.CENTER);
+		fr.setVisible(true);
+		
+	}
+	
+	
+
+}

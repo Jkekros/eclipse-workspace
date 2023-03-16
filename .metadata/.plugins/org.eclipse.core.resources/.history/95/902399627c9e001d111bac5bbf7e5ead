@@ -1,0 +1,15 @@
+package inc.soft.advpaint.x64.figures;
+
+public class 
+ extends Point implements Nomme {
+
+	public PointNomme(String name, double x, double y) {
+		super(name, x, y);
+	}
+
+	@Override
+	public String getNom() {
+		return this.name;
+	}
+
+}

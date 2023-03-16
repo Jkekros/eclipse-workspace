@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;inc.soft.advpaint.x64.figures.figure.ToString()&apos; to &apos;tostring&apos;&#x0D;&#x0A;- Original project: &apos;ADVPAINT&apos;&#x0D;&#x0A;- Original element: &apos;inc.soft.advpaint.x64.figures.figure.ToString()&apos;&#x0D;&#x0A;- Renamed element: &apos;inc.soft.advpaint.x64.figures.figure.tostring()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;ToString&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;inc.soft.advpaint.x64.figures{figure.java[figure~ToString" name="tostring" references="true" stamp="1675448291993" version="1.0"/>
+</session>

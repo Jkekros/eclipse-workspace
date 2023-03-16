@@ -1,0 +1,34 @@
+package inc.soft.advpaint.x64.figures;
+
+public class Segment extends figure {
+	protected Point p1;
+	protected Point p2;
+	public Segment(String name,Point p1,Point p2) {
+		super(name);
+		this.p1=p1;
+		this.p2=p2;
+	}
+	@Override
+	public void Translate(double dx, double dy) {
+		p1.Translate(dx, dy);
+		p2.Translate(dx, dy);
+	}
+	@Override
+	public void affichage() {
+		System.out.println(this.ToString());
+		
+	}
+	@Override
+	public Point getcenter() {
+		return new Point("center",(p1.getX()+p2.getX())/2,(p1.getY()+p2.getY())/2);
+	}
+	public double getLongueur() {
+		return Math.sqrt(Math.pow(p1.getX()-p2.getX(),2) + Math.pow(p1.getY()-p2.getY(), 2));
+	}
+	@Override
+	public String ToString() {
+		
+		return "p1("+p1.ToString()+") & p1("+p2.ToString()+")";
+	}
+		
+}
