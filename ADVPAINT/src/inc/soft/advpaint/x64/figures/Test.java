@@ -97,8 +97,18 @@ public class Test {
 		System.out.println(s2.tostring()+s2.getNom());
 		System.out.println(s1.tostring()+s1	.getNom());
 	}
-
+	public static void polygtest() {
+		Point[] testp = {};
+		polygon p = new polygon("test",testp);
+		p.add(new Point("inutile",10,5));
+		for (int i=0;i<40;i++) {
+			p.adds(new Point("inutile "+i,Math.random()*50,Math.random()*50));
+		}
+		p.add(new Point("inutile 2",8,5));
+		p.tostring();
+	}
 	public static void main(String[] args) {
+		polygtest();
 		/*
 		System.out.println("test point");
 		testPoint();

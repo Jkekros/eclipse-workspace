@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;inc.soft.advpaint.x64.figures.figure.Paint(...)&apos; to &apos;paint&apos;&#x0D;&#x0A;- Original project: &apos;ADVPAINT&apos;&#x0D;&#x0A;- Original element: &apos;inc.soft.advpaint.x64.figures.figure.Paint(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;inc.soft.advpaint.x64.figures.figure.paint(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;Paint&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;inc.soft.advpaint.x64.figures{figure.java[figure~Paint~QGraphics;" name="paint" references="true" stamp="1679079371831" version="1.0"/>
+</session>

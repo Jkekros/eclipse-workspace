@@ -1,8 +1,14 @@
 package inc.soft.advpaint.x64.figures;
 
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
 public class Segment extends figure implements Cloneable,Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Point p1;
 	protected Point p2;
 	public Segment(String name,Point p1,Point p2) {
@@ -53,6 +59,47 @@ public class Segment extends figure implements Cloneable,Serializable {
 		c = (Segment)super.clone();
 
 		return c;
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void Paint(Graphics g) {
+		g.drawLine((int)p1.getX(), (int)p1.getY(), (int)p2.getX(), (int)p2.getY());
+		p1.Paint(g);
+		p2.Paint(g);
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

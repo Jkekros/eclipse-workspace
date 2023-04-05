@@ -1,5 +1,7 @@
 package inc.soft.advpaint.x64.figures;
 
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
 public class Point extends figure implements Cloneable,Serializable{
@@ -58,6 +60,50 @@ public class Point extends figure implements Cloneable,Serializable{
 		c = (Point)super.clone();
 
 		return c;
+		
+	}
+	@Override
+	public void Paint(Graphics g) {
+		int size = 5;
+		g.fillOval((int)this.X-size, (int)this.Y-size,size , size);
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Point cl = this.clone();
+		cl.setX(e.getX());
+		cl.setY(e.getY());
+		ed.figs.add(cl);
+		ed.repaint();
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

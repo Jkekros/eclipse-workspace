@@ -1,0 +1,68 @@
+package inc.soft.advpaint.x64.figures;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class polygon extends figure implements Cloneable,Serializable {
+	protected ArrayList<Point> seg;
+	public polygon(String name,Point[] p) {
+		super(name);
+		for (int i=0;i<=p.length; i++) {
+			seg.add(p[i]);
+		}
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void Translate(double dx, double dy) {
+		for (Point se : seg) {
+			se.Translate(dx, dy);
+		}
+		
+	}
+	@Override
+	public void affichage() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Point getcenter() {
+		double[] tot = {0,0};
+		for (Point segment : seg) {
+			tot[0] += segment.getX();
+			tot[1] += segment.getY();
+		}
+		tot[0] = tot[0]/seg.size();
+		tot[1] = tot[1]/seg.size();
+		return new Point("cent",tot[0],tot[1]);
+	}
+	@Override
+	public String tostring() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean add(Point p) {
+		double low;
+		int ind;
+		if (seg.size() != 0) {
+			low= p.distance(seg.get(0));
+			ind = 0;
+			for (int i=0;i<=seg.size();i++) {
+				if (p.getX() != seg.get(i).getX() && p.getY() != seg.get(i).getX()){
+					if (seg.get(i).distance(p)<=low) {
+						low = i;
+					}
+				
+				}
+			
+			}
+			return true;
+		}else {
+			seg[0] = p;
+			return true;
+		}
+		return false;
+		
+	}
+
+}
