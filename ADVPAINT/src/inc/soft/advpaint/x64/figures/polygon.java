@@ -10,6 +10,7 @@ public class polygon extends figure implements Cloneable,Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public int tmp = -1;
 	protected ArrayList<Point> seg;
 	public polygon(String name,Point[] p) {
 		super(name);
@@ -77,18 +78,52 @@ public class polygon extends figure implements Cloneable,Serializable {
 				return true;
 			}
 		}
+	public polygon clone() {
+		polygon c = null;
+		c = (polygon)super.clone();
+		ArrayList<Point> ls = new ArrayList<Point>();
+		for (Point p : seg) {
+			ls.add(p.clone());
+		}
+		c.seg = ls;
+		return c;
+		
+		
+	}
 	public boolean add(Point p) {
 		seg.add(p);
 		return true;
 	}
 	@Override
 	public void Paint(Graphics g) {
-		// TODO Auto-generated method stub
+		Point lst= null;
+		for (Point p : seg) {
+			if (lst != null) {
+				g.drawLine((int)p.getX(), (int)p.getY(), (int)lst.getX(), (int)lst.getY());
+			}
+			p.Paint(g);
+			lst = p;
+		}
+		Point p = seg.get(0);
+		g.drawLine((int)p.getX(), (int)p.getY(), (int)lst.getX(), (int)lst.getY());
 		
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
+		Point p = new Point("",e.getX(),e.getY());
+		
+		adds(p);
+		polygon g = this.clone();
+		if (tmp > -1) {
+			ed.figs.set(tmp, g);
+		}else {
+			ed.figs.add(g);
+		}
+		
+		tmp =ed.figs.indexOf(g);
+		
+		ed.repaint();
 		
 	}
 	@Override

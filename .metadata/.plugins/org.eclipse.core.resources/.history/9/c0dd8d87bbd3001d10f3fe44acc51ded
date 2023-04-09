@@ -1,0 +1,157 @@
+package inc.soft.advpaint.x64.figures;
+
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class polygon extends figure implements Cloneable,Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected ArrayList<Point> seg;
+	public polygon(String name,Point[] p) {
+		super(name);
+		if (p != null && p.length !=0) {
+			for (int i=0;i<p.length; i++) {
+				seg.add(p[i]);
+			}
+		}else {
+			seg = new ArrayList<Point>();
+		}
+	}
+	@Override
+	public void Translate(double dx, double dy) {
+		for (Point se : seg) {
+			se.Translate(dx, dy);
+		}
+	}
+	@Override
+	public void affichage() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Point getcenter() {
+		double[] tot = {0,0};
+		for (Point segment : seg) {
+			tot[0] += segment.getX();
+			tot[1] += segment.getY();
+		}
+		tot[0] = tot[0]/seg.size();
+		tot[1] = tot[1]/seg.size();
+		return new Point("cent",tot[0],tot[1]);
+	}
+	@Override
+	public String tostring() {
+		for (Point ele: seg) {
+			System.out.println(ele.tostring());
+		}
+		return null;
+	}
+	public boolean adds(Point p) {
+			double low;
+			int ind;
+			if (seg.size() != 0) {
+				low= p.distance(seg.get(0));
+				ind = 0;
+				for (int i=0;i<seg.size();i++) {
+					if (p.getX() != seg.get(i).getX() && p.getY() != seg.get(i).getX()){
+						double lowe;
+						if (i-1==-1) {
+							lowe = (seg.get(i).distance(p) + seg.get(seg.size()-1).distance(p))/2;
+						}else {
+							lowe = (seg.get(i).distance(p) + seg.get(i-1).distance(p))/2;
+						}
+						if (low>lowe) {
+							low = lowe;
+							ind =i;
+						}
+					}	
+				}
+				seg.add(ind, p);
+				return true;	
+			}else {
+				seg.add(p);
+				return true;
+			}
+		}
+	public polygon clone() {
+		polygon c = null;
+		try {
+			c = (polygon)super.clone();
+			ArrayList<Point> ls = new ArrayList<Point>();
+			for (Point p : seg) {
+				ls.add(p.clone());
+			}
+			c.seg = ls;
+			return c;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	public boolean add(Point p) {
+		seg.add(p);
+		return true;
+	}
+	@Override
+	public void Paint(Graphics g) {
+		Point lst= null;
+		for (Point p : seg) {
+			if (lst != null) {
+				g.drawLine((int)p.getX(), (int)p.getY(), (int)lst.getX(), (int)lst.getY());
+				System.out.println(lst);
+			}
+			p.Paint(g);
+			lst = p;
+		}
+		Point p = seg.get(0);
+		g.drawLine((int)p.getX(), (int)p.getY(), (int)lst.getX(), (int)lst.getY());
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Point p = new Point("",e.getX(),e.getY());
+		
+		adds(p);
+		polygon g = this.clone();
+		ed.figs.add(g);
+		ed.repaint();
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

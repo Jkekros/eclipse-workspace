@@ -57,23 +57,33 @@ public class Segment extends figure implements Cloneable,Serializable {
 	public Segment clone() {
 		Segment c = null;
 		c = (Segment)super.clone();
-
+		c.p1 = this.p1.clone();
+		c.p2 = this.p2.clone();
 		return c;
 		
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		Point p = new Point("", e.getX(), e.getY());
+		this.p1 = p;
 		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		Point p = new Point("", e.getX(), e.getY());
+		this.p2 = p;
+		Segment ss = this.clone();
+		
+		ed.figs.add(ss);
+		ed.repaint();
 		
 	}
 	@Override

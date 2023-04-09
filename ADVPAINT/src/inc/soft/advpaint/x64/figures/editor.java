@@ -8,26 +8,34 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class editor extends JPanel implements MouseListener{
+public class editor extends JPanel implements MouseMotionListener,MouseListener{
 	/**
 	 * 
 	 * 
 	 */
+	private Dimension selpoint;
+	private Dimension Cpoint;
 	public ArrayList<figure> figs;
 	private Point P;
 	private Segment S;
 	private Cercle C;
 	private polygon G;
 	private figure currentstate;
+	private ArrayList<Integer> isel = new ArrayList<Integer>();
 	private static final long serialVersionUID = 1L;
 	public editor() {
 		figs = new ArrayList<figure>();
@@ -39,7 +47,18 @@ public class editor extends JPanel implements MouseListener{
 		S.setEdit(this);
 		C.setEdit(this);
 		G.setEdit(this);
-
+		
+	}
+	public void reset_v() {
+		this.P = new Point("",0,0);
+		this.S = new Segment("",null,null);
+		this.C = new Cercle("",null,0);
+		this.G = new polygon("",null);
+		P.setEdit(this);
+		S.setEdit(this);
+		C.setEdit(this);
+		G.setEdit(this);
+		isel.clear();
 	}
 	public static void main(String[] args) {
 		JFrame fr = new JFrame("editeur");
@@ -49,12 +68,56 @@ public class editor extends JPanel implements MouseListener{
 		
 		Container cont = fr.getContentPane();
 		editor co2 = new editor();
-		JPanel co = new JPanel();
-		co.setBackground(Color.blue);
-		co.setLayout(new FlowLayout());
-		co.setPreferredSize(new Dimension(170,0));
+		
+		
 		co2.setBackground(Color.white);
-		JButton j = new JButton("point");
+		JMenuBar men =new JMenuBar();
+		JMenu m = new JMenu("create");
+		JMenuItem j = new JMenuItem("Point");
+		JMenuItem j1 = new JMenuItem("segment");
+		JMenuItem j2 = new JMenuItem("cercle");
+		JMenuItem j3 = new JMenuItem("polygon");
+		JMenu m1 = new JMenu("selection");
+		JMenuItem s1 = new JMenuItem("selectionner");
+		JMenuItem s2 = new JMenuItem("deselectionner");
+		s1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (MouseListener m :  co2.getMouseListeners()) {
+					co2.removeMouseListener(m);
+					
+				}
+				co2.reset_v();
+				
+				co2.addMouseMotionListener(co2);
+				co2.addMouseListener(co2);
+				
+			}
+			
+		});
+		s2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (MouseListener m :  co2.getMouseListeners()) {
+					co2.removeMouseListener(m);
+					
+				}
+				co2.removeMouseMotionListener(co2);
+				co2.reset_v();
+				
+				
+				
+				
+			}
+			
+		});
+		s2.setMnemonic(KeyEvent.VK_ESCAPE);
+		m1.add(s1);
+		m1.add(s2);
+		men.add(m);
+		men.add(m1);
 		j.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,6 +126,7 @@ public class editor extends JPanel implements MouseListener{
 					co2.removeMouseListener(m);
 					
 				}
+				co2.reset_v();
 				co2.currentstate = co2.P;
 				
 				co2.addMouseListener(co2.currentstate);
@@ -71,7 +135,7 @@ public class editor extends JPanel implements MouseListener{
 			
 		});
 		
-		JButton j1 = new JButton("segment");
+		
 		j1.addActionListener(new ActionListener() {
 
 			@Override
@@ -80,12 +144,12 @@ public class editor extends JPanel implements MouseListener{
 					co2.removeMouseListener(m);
 					
 				}
+				co2.reset_v();
 				co2.currentstate = co2.S;
 				co2.addMouseListener(co2.currentstate);	
 			}
 			
 		});
-		JButton j2 = new JButton("cercle");
 		j2.addActionListener(new ActionListener() {
 
 			@Override
@@ -94,24 +158,35 @@ public class editor extends JPanel implements MouseListener{
 					co2.removeMouseListener(m);
 					
 				}
+				co2.reset_v();
 				co2.currentstate = co2.C;
 				co2.addMouseListener(co2.currentstate);	
 			}
 			
 		});
-		JButton j3 = new JButton("polygon");
-		j.setPreferredSize(new Dimension(150,40));
-		j1.setPreferredSize(new Dimension(150,40));
-		j2.setPreferredSize(new Dimension(150,40));
-		j3.setPreferredSize(new Dimension(150,40));
-		co.add(j);
-		co.add(j1);
-		co.add(j2);
-		co.add(j3);
-		/* ne pas faire hériter la classe editeur de JFrame mais de JPanel */
-		Point p  = new Point("test",50,200);
-		co2.figs.add(p);
-		cont.add(co, BorderLayout.EAST);
+		j3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (MouseListener m :  co2.getMouseListeners()) {
+					co2.removeMouseListener(m);
+					
+				}
+				co2.reset_v();
+				co2.currentstate = co2.G;
+				co2.addMouseListener(co2.currentstate);	
+			}
+			
+		});
+		
+		m.add(j);
+		m.add(j1);
+		m.add(j2);
+		m.add(j3);
+		
+		cont.add(men,BorderLayout.NORTH);
+		
+		
 		cont.add(co2,BorderLayout.CENTER);
 		fr.setVisible(true);
 		cont.addMouseListener(co2.currentstate);
@@ -121,9 +196,15 @@ public class editor extends JPanel implements MouseListener{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		if (selpoint!=null && isel.size()==0) {
+			g.setColor(Color.blue);
+			g.fillRect(selpoint.width, selpoint.height, Cpoint.width-selpoint.width,Cpoint.height-selpoint.height);
+		}
+		g.setColor(Color.black);
 		for (figure ele : figs) {
 			ele.Paint(g);
 		}
+		
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -132,13 +213,24 @@ public class editor extends JPanel implements MouseListener{
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		selpoint = new Dimension(e.getX(),e.getY());
+		Cpoint = new Dimension(e.getX(),e.getY());
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if ((isel.size()==0)) {
+		for (int i =0;i<figs.size();i++) {
+			figure f = figs.get(i);
+			if (((f.getcenter().getX() >= selpoint.width) && (f.getcenter().getX() <= e.getX())) && ((f.getcenter().getY() >= selpoint.height) && (f.getcenter().getY() <= e.getY()))) {
+					isel.add(i);
+			}
+		}
+		}
 		
+		System.out.println(isel.size());
+		selpoint = null;
+		Cpoint = null;
+		repaint();
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -150,4 +242,23 @@ public class editor extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		Cpoint = new Dimension(e.getX(),e.getY());
+		if (isel.size() !=0) {
+			for (int i:isel) {
+				figs.get(i).Translate(Cpoint.width-selpoint.width, Cpoint.height-selpoint.height);
+			}
+			selpoint = (Dimension)Cpoint.clone();
+		}
+		this.repaint();
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		
+	}
 }
+

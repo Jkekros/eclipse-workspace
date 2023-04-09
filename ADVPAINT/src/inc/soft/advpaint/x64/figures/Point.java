@@ -65,7 +65,7 @@ public class Point extends figure implements Cloneable,Serializable{
 	@Override
 	public void Paint(Graphics g) {
 		int size = 5;
-		g.fillOval((int)this.X-size, (int)this.Y-size,size , size);
+		g.fillOval((int)this.X-(size/2), (int)this.Y-(size/2),size , size);
 		
 	}
 	@Override

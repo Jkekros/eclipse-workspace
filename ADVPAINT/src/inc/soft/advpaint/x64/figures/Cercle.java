@@ -70,6 +70,7 @@ public class Cercle extends figure implements Serializable,Cloneable{
 	}
 	@Override
 	public void Paint(Graphics g) {
+		this.o.Paint(g);
 		g.drawOval((int)(this.o.getX()-this.r), (int)(this.o.getY()-this.r), (int)(this.r*2), (int)(this.r*2));
 		
 	}
